@@ -1,0 +1,43 @@
+TODO
+
+Usage
+	- conductor creates a "play", selecting music and sound font (optional)
+	- conductor generates a QR code with the URL for performers
+	- performers scan, and are directed to the client.
+	- conductor has a count of connected performers. Starts the play when enough.
+	- each performer is assigned a channel (or track ? or notes ? or subset of any), and downloads its part and sample(s), signals he's ready
+	- conductor has a visual of readiness. Starts the play (can also pause/stop it).
+
+	Client is a nearly empty screen with a color pulsing when playing notes. Maybe minimal info with instruments assigned.
+	Music name can be displayed, if conductor allows (fun to guess what is playing)
+
+
+Server
+	- ability to generate a .mid from JSON
+	- ... only a given channel
+	- describe API needs
+		- 
+	- design sockets workflow
+	- code sockets
+	- ability to parse a sound font and generate smaller ones for individual instruments
+
+Client
+	- display tracks
+	- play tracks (find lib)
+	- edit lib to sync with visuals
+	- conductor GUI
+		- select a .mid
+		- select a soundFont
+		- ask the server for a QR code for performers (optional)
+		- shares the url with performers
+		- triggers the assignements
+		- see performers with readiness
+		- starts / pause / stop play
+		- destroys the play
+	- client GUI
+		- name of the play
+		- if allowed, name of the music
+		- download progress
+		- pulsating blank color
+		- button to show QR code to share with more performers
+

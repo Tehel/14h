@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>14h</title>
+	<script>
+		let period = 500;	// repeat every second
+		let duration = 200;	// duration of the pulse
+
+		// elements
+		let beatEl, traceEl, periodEl, durationEl;
+		let startDate = null;
+		let timer = null;
+		let running = true;
+
+		function init() {
+			beatEl = document.getElementById('beat');
+			traceEl = document.getElementById('trace');
+			periodEl = document.getElementById('period');
+			durationEl = document.getElementById('duration');
+			startDate = new Date();
+			timer = setInterval(color, 10);
+		}
+
+		const startStop = () => running = !running;
+		function periodAdd(inc) {
+			period = Math.max(0, period + inc);
+			periodEl.innerHTML = period;
+		}
+		function durationAdd(inc) {
+			duration = Math.max(0, duration + inc);
+			durationEl.innerHTML = duration;
+		}
+
+		function color() {
+			if (!running) return;
+
+			const now = new Date();
+			const diff = now - startDate;
+			const offset = diff % period;
+			let color = null;
+			let lvl;
+			if (offset > duration) {
+				lvl = 0;
+			} else {
+				lvl = Math.floor(Math.sin(offset / duration * Math.PI) * 255);
+			}
+			// trace.innerHTML = lvl;
+			beatEl.style.backgroundColor = `rgb(${lvl},${lvl},${lvl})`;
+		}
+	</script>
+	<style type="text/css">
+		body {
+			background-color: black;
+			color: white;
+		}
+		#beat {
+			width: 100px;
+			height: 100px;
+			background-color: black;
+		}
+	</style>
+</head>
+<body onload="init()">
+
+	<h1>14h</h1>	
+	<button onClick="startStop()">.</button>
+	<div id="beat">&nbsp;</div>
+	<div id="trace"></div>
+	<p><button onClick="periodAdd(-100)">-</button><button onClick="periodAdd(+100)">+</button> Period <span id="period"></span></p>
+	<p><button onClick="durationAdd(-100)">-</button><button onClick="durationAdd(+100)">+</button> Duration <span id="duration"></span></p>
+
+</body></html>
